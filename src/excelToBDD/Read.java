@@ -42,7 +42,6 @@ public class Read {
         }
 
         String[] arrayForBdd = new String[11];
-        int i = 0;
         ArrayList tableauDynamique = new ArrayList(Arrays.asList(arrayForBdd));
 
 
@@ -52,31 +51,55 @@ public class Read {
         for (Row row : sheet) {
             for (Cell cell : row) {
                 String cellValue = dataFormatter.formatCellValue(cell);
-                System.out.print(cellValue + "\t");
-                if (row.getRowNum() != 0) {
-                    tableauDynamique.add(cellValue);
+               // System.out.print(cellValue + "\t");
+                if (row.getRowNum() >= 1 ) {
+                   tableauDynamique.set(cell.getColumnIndex(),cellValue);
+                    if (cell.getColumnIndex() == 10)
+                    {
+                        Bdd bdd = new Bdd("root", "", "RIP");
+                        Request rqt = new Request(bdd);
+                         ArrayList req = rqt.req("Select * from users", "email");
+                        // System.out.println(req);
+                        Connection conn = bdd.getConn();
+                        Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                        PreparedStatement prepare = conn.prepareStatement("INSERT INTO `trajet` (`idTrajet`, `idClient`, `idChauffeur`, `heureDebut`, `heureFin`, `dateResevation`, `distanceTrajet`, `prixtrajet`, `debut`, `fin`, `duration`) VALUES (" +
+                                "NULL,'" + tableauDynamique.get(1) + "'," +
+                                "'" + tableauDynamique.get(2) + "'," +
+                                "'" + tableauDynamique.get(3) + "'," +
+                                "'" + tableauDynamique.get(4) + "'," +
+                                "'" + tableauDynamique.get(5) + "'," +
+                                "'" + tableauDynamique.get(6) + "'," +
+                                "'" + tableauDynamique.get(7) + "'," +
+                                "'" + tableauDynamique.get(8) + "'," +
+                                "'" + tableauDynamique.get(9) + "'," +
+                                "'" + tableauDynamique.get(10)+ "');");
+                        int statut = prepare.executeUpdate();
+                        if (statut == 1)
+                        {
+                            System.out.println("Vous avez bien inséré vos trajets excels dans la base de données");
+                        }
+                        else
+                        {
+                            System.out.println("Il y a eu un problème lors de l'insertion des trajets dans la base de données");
+
+                        }
+
+                    }
+                    /*
+
+                    */
+
+
                 }
 
 
             }
-              System.out.println();
-            System.out.println(tableauDynamique);
         }
 
 
 
 
-        Bdd bdd = new Bdd("root", "", "RIP");
-        Request rqt = new Request(bdd);
-        ArrayList req = rqt.req("Select * from users", "email");
-        System.out.println(req);
 
-        Connection conn = bdd.getConn();
-
-        System.out.println(conn);
-        Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        PreparedStatement prepare = conn.prepareStatement("INSERT INTO `trajet` (`idTrajet`, `idClient`, `idChauffeur`, `heureDebut`, `heureFin`, `dateResevation`, `distanceTrajet`, `prixtrajet`, `debut`, `fin`, `duration`) VALUES (NULL, '1', '24', '2020-10-10 10:00:01', '2020-10-10 10:04:00', '2019-03-23 15:15:31', '465', '498.27', '242 Faubourg-Saint Antoine 75012', 'Lyon', '4 hours 26 mins');");
-        prepare.executeUpdate();
         // Closing the workbook
         workbook.close();
     }
