@@ -25,9 +25,9 @@ public class Bdd {
         try {
 
             //STEP 3: Open a connection
-            System.out.println("Connecting to a selected database...");
+            // System.out.println("Conection à la base de données...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("Connected database successfully...");
+           // System.out.println("Connection réussit à la base de données...");
 
         } catch (SQLException se) {
             //Handle errors for JDBC
