@@ -75,7 +75,7 @@ public class RequestInsert {
                 }
             }
             if (count == 0) {
-                PreparedStatement prepare = conn.prepareStatement("INSERT INTO `trajet` (`idTrajet`, `idClient`, `idChauffeur`, `heureDebut`, `heureFin`, `dateResevation`, `distanceTrajet`, `prixtrajet`, `debut`, `fin`, `duration`) VALUES (" +
+                PreparedStatement prepare = conn.prepareStatement("INSERT INTO trajet (idTrajet, idClient, idChauffeur, heureDebut, heureFin, dateResevation, distanceTrajet, prixtrajet, debut, fin, duration) VALUES (" +
                         "" + arrayInfo.get(0) + "," +
                         "'" + arrayInfo.get(1) + "'," +
                         "'" + arrayInfo.get(2) + "'," +

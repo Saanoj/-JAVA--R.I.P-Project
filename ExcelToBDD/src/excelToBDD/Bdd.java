@@ -20,6 +20,14 @@ public class Bdd {
         return conn;
     }
 
+    public static Connection startBDD(Bdd bdd)
+    {
+        Connection conn = null;
+        bdd.startConnect();
+        conn = bdd.getConn();
+        return conn;
+    }
+
     public void startConnect() {
 
         try {
