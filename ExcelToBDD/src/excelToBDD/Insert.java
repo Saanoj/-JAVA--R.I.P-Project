@@ -35,7 +35,7 @@ public class Insert {
 
     public boolean trajet(int client, int chauffeur, String heureDebut, String heureFin, String date, int distance, int prix, String debut, String fin, String duration) throws SQLException {
         Connection conn = startBdd();
-        PreparedStatement prepare = conn.prepareStatement("INSERT INTO trajet (idTrajet, idClient, idChauffeur, heureDebut, heureFin, dateResevation, distanceTrajet, prixtrajet, debut, fin, duration) VALUES (" +
+        PreparedStatement prepare = conn.prepareStatement("INSERT INTO trajet (idClient, idChauffeur, heureDebut, heureFin, dateResevation, distanceTrajet, prixtrajet, debut, fin, duration) VALUES (" +
                 "" + client + "," +
                 "'" + chauffeur + "'," +
                 "'" + heureDebut + "'," +
