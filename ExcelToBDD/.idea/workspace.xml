@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b1317e8-cab6-44f0-b61b-6d0b62436a92" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/excel.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/excel.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ExcelToBDD/excelToBDD/Excel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExcelToBDD/excelToBDD/Excel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ExcelToBDD/excelToBDD/Update.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExcelToBDD/excelToBDD/Update.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/excelToBDD/Excel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/excelToBDD/Excel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/excelToBDD/Update.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/excelToBDD/Update.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -81,8 +77,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/excelToBDD/Excel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="58" column="29" selection-start-line="58" selection-start-column="29" selection-end-line="58" selection-end-column="29" />
+            <state relative-caret-position="314">
+              <caret line="36" column="60" selection-start-line="36" selection-start-column="60" selection-end-line="36" selection-end-column="60" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -142,8 +138,8 @@
         <option value="$PROJECT_DIR$/src/excelToBDD/Insert.java" />
         <option value="$PROJECT_DIR$/src/excelToBDD/Read.java" />
         <option value="$PROJECT_DIR$/src/excelToBDD/Main.java" />
-        <option value="$PROJECT_DIR$/src/excelToBDD/Excel.java" />
         <option value="$PROJECT_DIR$/src/excelToBDD/Update.java" />
+        <option value="$PROJECT_DIR$/src/excelToBDD/Excel.java" />
       </list>
     </option>
   </component>
@@ -188,7 +184,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556547620033" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556547966999" />
     <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -253,7 +249,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -262,7 +258,7 @@
       <window_info anchor="bottom" id="Floobits" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.3296146" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32964823" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -368,8 +364,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/excelToBDD/Excel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="58" column="29" selection-start-line="58" selection-start-column="29" selection-end-line="58" selection-end-column="29" />
+        <state relative-caret-position="314">
+          <caret line="36" column="60" selection-start-line="36" selection-start-column="60" selection-end-line="36" selection-end-column="60" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

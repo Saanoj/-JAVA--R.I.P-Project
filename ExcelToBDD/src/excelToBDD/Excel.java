@@ -34,7 +34,7 @@ public class Excel {
 
                                     array.set(cell.getColumnIndex(), cellValue);
                                     if (row.getRowNum() == 1) {
-                                        if (cellValue == null) {
+                                        if (cellValue == "0") {
                                             newTrajet = 1;
                                         }
                                     }
