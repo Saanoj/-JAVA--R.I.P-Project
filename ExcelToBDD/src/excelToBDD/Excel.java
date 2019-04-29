@@ -13,6 +13,9 @@ public class Excel {
     public Excel(String name){
         this.name = name;
     }
+
+
+
     public void JustDoIt() throws IOException, SQLException{
         Workbook workbook = WorkbookFactory.create(new File(name));
         Sheet sheet = workbook.getSheetAt(0);
@@ -22,24 +25,24 @@ public class Excel {
         int newTrajet = 0;
         for (Row row : sheet) {
 
-            for (Cell cell : row) {
-                if (row.getRowNum()!=0) {
-                    String cellValue = dataFormatter.formatCellValue(cell);
+                            for (Cell cell : row) {
+                                if (row.getRowNum()!=0) {
+                                    String cellValue = dataFormatter.formatCellValue(cell);
 
-                    System.out.print(cell.getColumnIndex()+" : ");
-                    System.out.println(cellValue);
+                                    System.out.print(cell.getColumnIndex()+" : ");
+                                    System.out.println(cellValue);
 
-                    array.set(cell.getColumnIndex(), cellValue);
-                    if (row.getRowNum() == 1) {
-                        if (cellValue == null) {
-                            newTrajet = 1;
-                        }
-                    }
-                    if (row.getRowNum() >= 2) {
+                                    array.set(cell.getColumnIndex(), cellValue);
+                                    if (row.getRowNum() == 1) {
+                                        if (cellValue == null) {
+                                            newTrajet = 1;
+                                        }
+                                    }
+                                    if (row.getRowNum() >= 2) {
 
-                        if (cell.getColumnIndex() == 10) {
-                            toBDD(array, newTrajet);
-                        }
+                                        if (cell.getColumnIndex() == 10) {
+                                            toBDD(array, newTrajet);
+                                        }
 
                     }
                 }
@@ -49,8 +52,8 @@ public class Excel {
         workbook.close();
     }
 
-    private void toBDD(ArrayList<String> array, int newTrajer) throws SQLException{
-        if (newTrajer == 1 ){
+    private void toBDD(ArrayList<String> array, int newTrajet) throws SQLException{
+        if (newTrajet == 1 ){
             Insert.trajet(array);
         }else{
             Update.trajet(array);
