@@ -37,7 +37,7 @@ public class Read {
             }
         }
 
-        String[] arrayForBdd = new String[11];
+        String[] arrayForBdd = new String[13];
         ArrayList arrayInfo = new ArrayList(Arrays.asList(arrayForBdd));
         Bdd bdd = new Bdd("root", "", "RIP");
         RequestInsert rqt = new RequestInsert(bdd);
@@ -50,11 +50,12 @@ public class Read {
             for (Cell cell : row) {
                 String cellValue = dataFormatter.formatCellValue(cell);
 
-                if (row.getRowNum() >= 1 ) {
+                if (row.getRowNum() > 1 ) {
 
                     arrayInfo.set(cell.getColumnIndex(),cellValue);
+                    System.out.println(cell.getColumnIndex());
 
-                    if (cell.getColumnIndex() == 10)
+                    if (cell.getColumnIndex() == 12)
                     {
 
                         ArrayList req = rqt.req(arrayInfo,bdd.getConn());

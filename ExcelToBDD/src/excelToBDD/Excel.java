@@ -20,7 +20,7 @@ public class Excel {
         Workbook workbook = WorkbookFactory.create(new File(name));
         Sheet sheet = workbook.getSheetAt(0);
         DataFormatter dataFormatter = new DataFormatter();
-        String[] arrayForBdd = new String[12];
+        String[] arrayForBdd = new String[13];
         ArrayList<String> array = new ArrayList<>(Arrays.asList(arrayForBdd));
         int newTrajet = 0;
         for (Row row : sheet) {
@@ -29,18 +29,16 @@ public class Excel {
                                 if (row.getRowNum()!=0) {
                                     String cellValue = dataFormatter.formatCellValue(cell);
 
-                                    System.out.print(cell.getColumnIndex()+" : ");
-                                    System.out.println(cellValue);
-
                                     array.set(cell.getColumnIndex(), cellValue);
-                                    if (row.getRowNum() == 1) {
-                                        if (cellValue == "0") {
-                                            newTrajet = 1;
-                                        }
-                                    }
-                                    if (row.getRowNum() >= 2) {
 
-                                        if (cell.getColumnIndex() == 10) {
+                                    if (row.getRowNum() >= 1) {
+                                        if (cell.getColumnIndex() == 0) {
+                                            if (cellValue.equals("0"))
+                                            {
+                                                newTrajet = 1;
+                                            }
+                                        }
+                                        if (cell.getColumnIndex() == 12) {
                                             toBDD(array, newTrajet);
                                         }
 

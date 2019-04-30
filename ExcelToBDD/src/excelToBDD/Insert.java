@@ -33,11 +33,30 @@ public class Insert {
         }
     }
 
+    public static boolean checkNull (ArrayList<String> array) throws SQLException {
+
+        String id = array.get(0);
+        if (id.equals("0"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
 
     public static void trajet(ArrayList<String> array) throws SQLException {
+        if (checkNull(array) == true)
+        {
+            array.set(0,"NULL");
+        }
         Connection conn = startBdd();
-        PreparedStatement prepare = conn.prepareStatement("INSERT INTO trajet (idClient, idChauffeur, heureDebut, heureFin, dateResevation, distanceTrajet, prixtrajet, debut, fin, duration) VALUES (" +
-                "" + array.get(1) + "," +
+        PreparedStatement prepare = conn.prepareStatement("INSERT INTO trajet (idTrajet,idClient, idChauffeur, heureDebut, heureFin, dateResevation, distanceTrajet, prixtrajet, debut, fin, duration,state,stateDriver) VALUES (" +
+                 "" + array.get(0) + "," +
+                 "" + array.get(1) + "," +
                 "'" + array.get(2) + "'," +
                 "'" + array.get(3) + "'," +
                 "'" + array.get(4) + "'," +
@@ -47,7 +66,8 @@ public class Insert {
                 "'" + array.get(8) + "'," +
                 "'" + array.get(9) + "'," +
                 "'" + array.get(10) + "'," +
-                "'" + array.get(11) + "');");
+                "'" + array.get(11) + "'," +
+                "'" + array.get(12) + "');");
         int statut = prepare.executeUpdate();
         if (statut == 1) {
             System.out.println("Vous avez bien inséré le trajet  dans la base de donnée");
