@@ -46,8 +46,8 @@ public class Update {
                 "debut = '" + array.get(8) + "', " +
                 "fin = '" + array.get(9) + "', " +
                 "duration = '" + array.get(10) + " '" +
-               // "state = '" + array.get(11) + " '" +
-                //"stateDriver = '" + array.get(12) + " '" +
+                "state = ' Finis'" +
+                "stateDriver = '1'" +
                 "WHERE idTrajet = '"+array.get(0)+"'");
        // System.out.println(prepare);
         int statut = prepare.executeUpdate();
