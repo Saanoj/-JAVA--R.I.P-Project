@@ -16,11 +16,14 @@ public class Select {
         return conn;
     }
 
-    public static String idTrajet() throws SQLException {
+    public static int idTrajet() throws SQLException {
         Connection conn = startBdd();
+        int idTrajetString = 0;
         PreparedStatement prepare = conn.prepareStatement("SELECT idTrajet FROM trajet ORDER BY idTrajet DESC");
         ResultSet idTrajet = prepare.executeQuery();
-        String idTrajetString = idTrajet.toString();
+        if (idTrajet.first()) {
+             idTrajetString = idTrajet.getInt("idTrajet");
+        }
         return idTrajetString;
 
     }

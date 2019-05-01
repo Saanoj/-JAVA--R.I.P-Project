@@ -71,7 +71,7 @@ public class Insert {
         int statut = prepare.executeUpdate();
         if (statut == 1) {
             System.out.println("Vous avez bien inséré le trajet  dans la base de donnée");
-            String id = Select.idTrajet();
+            int id = Select.idTrajet();
             System.out.println("L'id nouvelle est "+ id);
 
         } else {
