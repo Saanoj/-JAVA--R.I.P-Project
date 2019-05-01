@@ -17,7 +17,7 @@ public class Insert {
         return conn;
     }
 
-    public boolean remuneration(String collab, String trajet, String price) throws SQLException {
+    public static boolean remuneration(String collab, String trajet, String price) throws SQLException {
         Connection conn = startBdd();
         PreparedStatement prepare = conn.prepareStatement("INSERT INTO remuneration (idCollab, idTrajet, Price) VALUES (" +
                 "" + collab + "," +

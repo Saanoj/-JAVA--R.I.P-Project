@@ -28,16 +28,29 @@ public class Excel {
                             for (Cell cell : row) {
                                 if (row.getRowNum()!=0) {
                                     String cellValue = dataFormatter.formatCellValue(cell);
-
+                                    int cellValue2 = dataFormatter.hashCode(cell);
                                     array.set(cell.getColumnIndex(), cellValue);
-
+                                    String chauffeur;
+                                    String trajet;
+                                    String price;
                                     if (row.getRowNum() >= 1) {
                                         if (cell.getColumnIndex() == 0) {
                                             if (cellValue.equals("0"))
                                             {
                                                 newTrajet = 1;
                                             }
+                                            trajet = cellValue;
                                         }
+
+                                        if (cell.getColumnIndex() == 2) {
+                                            chauffeur = cellValue;
+                                        }
+
+                                        if (cell.getColumnIndex() == 7) {
+                                            price = dataFormatter.formatCellValue(cellValue2/2)
+                                            Insert.remuneration(chauffeur,trajet, price);
+                                        }
+                                        if
                                         if (cell.getColumnIndex() == 12) {
                                             toBDD(array, newTrajet);
                                         }
