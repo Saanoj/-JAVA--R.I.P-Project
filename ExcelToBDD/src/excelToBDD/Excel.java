@@ -28,7 +28,7 @@ public class Excel {
                             for (Cell cell : row) {
                                 if (row.getRowNum()!=0) {
                                     String cellValue = dataFormatter.formatCellValue(cell);
-                                    int cellValue2 = dataFormatter.hashCode(cell);
+                                    //int cellValue2 = dataFormatter.hashCode(cell);
                                     array.set(cell.getColumnIndex(), cellValue);
                                     String chauffeur;
                                     String trajet;
@@ -46,11 +46,11 @@ public class Excel {
                                             chauffeur = cellValue;
                                         }
 
-                                        if (cell.getColumnIndex() == 7) {
+                                       /* if (cell.getColumnIndex() == 7) {
                                             price = dataFormatter.formatCellValue(cellValue2/2)
                                             Insert.remuneration(chauffeur,trajet, price);
-                                        }
-                                        if
+                                        }*/
+
                                         if (cell.getColumnIndex() == 12) {
                                             toBDD(array, newTrajet);
                                         }
@@ -70,5 +70,7 @@ public class Excel {
             Update.trajet(array);
         }
     }
+
+
 }
 
