@@ -21,8 +21,8 @@ public class Insert {
         Connection conn = startBdd();
         PreparedStatement prepare = conn.prepareStatement("INSERT INTO remuneration (idCollab, idTrajet, Price) VALUES (" +
                 "" + collab + "," +
-                "'" + trajet + "'," +
-                "'" + price + "');");
+                "" + trajet + "," +
+                "" + price + ");");
         int statut = prepare.executeUpdate();
         if (statut == 1) {
             System.out.println("Vous avez bien inséré la rémunération  dans la base de donnée");
@@ -71,8 +71,7 @@ public class Insert {
         int statut = prepare.executeUpdate();
         if (statut == 1) {
             System.out.println("Vous avez bien inséré le trajet  dans la base de donnée");
-            int id = Select.idTrajet();
-            System.out.println("L'id nouvelle est "+ id);
+
 
         } else {
             System.out.println("Il y a eu un problème lors de l'insertion de la rémunération dans la base de données");

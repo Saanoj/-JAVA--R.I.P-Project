@@ -1,5 +1,6 @@
 package excelToBDD;
 
+import com.mysql.cj.xdevapi.Column;
 import org.apache.poi.ss.usermodel.*;
 
 import java.io.File;
@@ -22,37 +23,40 @@ public class Excel {
         DataFormatter dataFormatter = new DataFormatter();
         String[] arrayForBdd = new String[13];
         ArrayList<String> array = new ArrayList<>(Arrays.asList(arrayForBdd));
+
+        String chauffeur = null;
+        String priceString=null;
         int newTrajet = 0;
         for (Row row : sheet) {
 
                             for (Cell cell : row) {
                                 if (row.getRowNum()!=0) {
                                     String cellValue = dataFormatter.formatCellValue(cell);
-                                    //int cellValue2 = dataFormatter.hashCode(cell);
+
                                     array.set(cell.getColumnIndex(), cellValue);
-                                    String chauffeur;
-                                    String trajet;
-                                    String price;
+
                                     if (row.getRowNum() >= 1) {
                                         if (cell.getColumnIndex() == 0) {
                                             if (cellValue.equals("0"))
                                             {
                                                 newTrajet = 1;
                                             }
-                                            trajet = cellValue;
+
                                         }
 
                                         if (cell.getColumnIndex() == 2) {
                                             chauffeur = cellValue;
                                         }
 
-                                       /* if (cell.getColumnIndex() == 7) {
-                                            price = dataFormatter.formatCellValue(cellValue2/2)
-                                            Insert.remuneration(chauffeur,trajet, price);
-                                        }*/
+                                        if (cell.getColumnIndex() == 7) {
+
+                                            priceString = cellValue;
+                                            int priceInt = Integer.parseInt(priceString)/2;
+                                            priceString = Integer.toString(priceInt);
+                                        }
 
                                         if (cell.getColumnIndex() == 12) {
-                                            toBDD(array, newTrajet);
+                                            toBDD(array, newTrajet, chauffeur, priceString,row.getRowNum());
                                         }
 
                     }
@@ -63,12 +67,27 @@ public class Excel {
         workbook.close();
     }
 
-    private void toBDD(ArrayList<String> array, int newTrajet) throws SQLException{
+    private void toBDD(ArrayList<String> array, int newTrajet, String chauffeur, String price,int row) throws SQLException,IOException{
         if (newTrajet == 1 ){
             Insert.trajet(array);
+
+            int id = Select.idTrajet();
+            Insert.remuneration(chauffeur,Integer.toString(id),price);
+            changeIdTrajet(id,row);
+            System.out.println("L'id nouvelle est "+ id);
         }else{
             Update.trajet(array);
         }
+    }
+
+    private void changeIdTrajet(int id, int row) throws IOException{
+        Workbook workbook = WorkbookFactory.create(new File(name));
+        Sheet sheet = workbook.createSheet("Employee");
+        Row headerRow = sheet.createRow(row);
+        Cell cell = headerRow.createCell(1);
+        cell.setCellValue(id);
+        workbook.close();
+
     }
 
 
