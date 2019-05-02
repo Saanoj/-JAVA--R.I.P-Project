@@ -13,7 +13,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException,InvalidFormatException,SQLException  {
         Excel excel = new Excel("excel.xlsx");
-        excel.JustDoIt();
+        excel.justDoIt();
 
 
     }

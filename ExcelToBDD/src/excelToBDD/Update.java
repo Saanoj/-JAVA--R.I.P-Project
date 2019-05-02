@@ -60,5 +60,27 @@ public class Update {
         }
     }
 
+    public static void service(ArrayList<String> array) throws SQLException {
+        Connection conn = startBdd();
+        PreparedStatement prepare = conn.prepareStatement("UPDATE linkservicetrajet SET " +
+                "idTrajet = " + array.get(1) + ", " +
+                "idService = " + array.get(2) + ", " +
+                "idAnnexe=" + array.get(3) + ", " +
+                "quantite = " + array.get(4) + ", " +
+                "statut =" + array.get(5) + ", " +
+                "dateStart ='" + array.get(6) + "', " +
+                "dateEnd = '" + array.get(7) + " '," +
+                "WHERE idLink = '"+array.get(0)+"'");
+        // System.out.println(prepare);
+        int statut = prepare.executeUpdate();
+        if (statut == 1) {
+            System.out.println("Vous avez bien update le trajet dans la base de donnée");
+
+        } else {
+            System.out.println("Il y a eu un problème lors de l'update du trajet dans la base de donnée ( Trajet inexistant surement en BDD )");
+
+        }
+    }
+
 
 }

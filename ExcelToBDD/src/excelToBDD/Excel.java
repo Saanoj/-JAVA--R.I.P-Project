@@ -22,18 +22,87 @@ public class Excel {
         this.name = name;
     }
 
+    public void justDoIt() throws IOException, SQLException{
+        this.chauffeur();
+        this.collab();
+    }
 
-    public void JustDoIt() throws IOException, SQLException {
+    public void collab() throws IOException, SQLException{
         Workbook workbook = WorkbookFactory.create(new File(name));
-        Sheet sheet = workbook.getSheetAt(0);
+        Sheet sheet = workbook.getSheet("Collab");
+        DataFormatter dataFormatter = new DataFormatter();
+        String[] arrayForBdd = new String[8];
+        ArrayList<String> array = new ArrayList<>(Arrays.asList(arrayForBdd));
+
+
+
+        for (Row row : sheet) {
+            String collab = null;
+            String priceString = null;
+            int newService = 0;
+            for (Cell cell : row) {
+                if (row.getRowNum() != 0) {
+                    String cellValue = dataFormatter.formatCellValue(cell);
+
+                    array.set(cell.getColumnIndex(), cellValue);
+
+                    if (row.getRowNum() >= 1) {
+                        if (cell.getColumnIndex() == 0) {
+                            if (checkNull(array) == true) {
+                                newService = 1;
+                            }
+
+
+                        }
+
+
+                        if (cell.getColumnIndex() == 3) {
+                            collab = cellValue;
+                            priceString = Integer.toString(Select.priceCollab(collab));
+                        }
+
+
+
+
+
+
+                        if (cell.getColumnIndex() == 7) {
+                            toBDDCollab(array, newService, collab, priceString, row.getRowNum(), workbook, sheet);
+                        }
+
+                    }
+                }
+
+            }
+        }
+        workbook.close();
+
+    }
+    private void toBDDCollab(ArrayList<String> array, int newService, String collab, String price, int row, Workbook workbook, Sheet sheet) throws SQLException, IOException {
+        if (newService == 1) {
+            Insert.service(array);
+
+            int id = Select.idLink();
+            Insert.remuneration(collab, Integer.toString(id), price);
+            changeId(id, row, workbook, sheet);
+            System.out.println("L'id nouvelle est " + id);
+        } else {
+            Update.service(array);
+        }
+    }
+
+    public void chauffeur() throws IOException, SQLException {
+        Workbook workbook = WorkbookFactory.create(new File(name));
+        Sheet sheet = workbook.getSheet("Chauffeur");
         DataFormatter dataFormatter = new DataFormatter();
         String[] arrayForBdd = new String[13];
         ArrayList<String> array = new ArrayList<>(Arrays.asList(arrayForBdd));
 
-        String chauffeur = null;
-        String priceString = null;
+
 
         for (Row row : sheet) {
+            String chauffeur = null;
+            String priceString = null;
             int newTrajet = 0;
             for (Cell cell : row) {
                 if (row.getRowNum() != 0) {
@@ -62,7 +131,7 @@ public class Excel {
                         }
 
                         if (cell.getColumnIndex() == 12) {
-                            toBDD(array, newTrajet, chauffeur, priceString, row.getRowNum(), workbook, sheet);
+                            toBDDChauffeur(array, newTrajet, chauffeur, priceString, row.getRowNum(), workbook, sheet);
                         }
 
                     }
@@ -75,20 +144,20 @@ public class Excel {
 
     }
 
-    private void toBDD(ArrayList<String> array, int newTrajet, String chauffeur, String price, int row, Workbook workbook, Sheet sheet) throws SQLException, IOException {
+    private void toBDDChauffeur(ArrayList<String> array, int newTrajet, String chauffeur, String price, int row, Workbook workbook, Sheet sheet) throws SQLException, IOException {
         if (newTrajet == 1) {
             Insert.trajet(array);
 
             int id = Select.idTrajet();
             Insert.remuneration(chauffeur, Integer.toString(id), price);
-            changeIdTrajet(id, row, workbook, sheet);
+            changeId(id, row, workbook, sheet);
             System.out.println("L'id nouvelle est " + id);
         } else {
             Update.trajet(array);
         }
     }
 
-    private void changeIdTrajet(int id, int rowId, Workbook workbook, Sheet sheet) throws IOException {
+    private void changeId(int id, int rowId, Workbook workbook, Sheet sheet) throws IOException {
         Row row = sheet.getRow(rowId);
         Cell cell = row.getCell(0);
         if (cell != null) {

@@ -28,5 +28,29 @@ public class Select {
 
     }
 
+    public static int idLink() throws SQLException {
+        Connection conn = startBdd();
+        int idLink = 0;
+        PreparedStatement prepare = conn.prepareStatement("SELECT idLink FROM linkservicetrajet ORDER BY idLink DESC");
+        ResultSet idTrajet = prepare.executeQuery();
+        if (idTrajet.first()) {
+            idLink = idTrajet.getInt("idLink");
+        }
+        return idLink;
+
+    }
+
+
+    public static int priceCollab(String id) throws SQLException {
+        Connection conn = startBdd();
+        int price = 0;
+        PreparedStatement prepare = conn.prepareStatement("SELECT prixService FROM services WHERE idService ="+ id);
+        ResultSet idTrajet = prepare.executeQuery();
+        if (idTrajet.first()) {
+            price = idTrajet.getInt("prixService");
+        }
+        return price;
+
+    }
 
 }
