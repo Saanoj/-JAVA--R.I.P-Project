@@ -17,13 +17,13 @@ import java.util.Arrays;
 
 public class Excel {
     private String name;
-    public Excel(String name){
+
+    public Excel(String name) {
         this.name = name;
     }
 
 
-
-    public void JustDoIt() throws IOException, SQLException{
+    public void JustDoIt() throws IOException, SQLException {
         Workbook workbook = WorkbookFactory.create(new File(name));
         Sheet sheet = workbook.getSheetAt(0);
         DataFormatter dataFormatter = new DataFormatter();
@@ -31,39 +31,39 @@ public class Excel {
         ArrayList<String> array = new ArrayList<>(Arrays.asList(arrayForBdd));
 
         String chauffeur = null;
-        String priceString=null;
-        int newTrajet = 0;
+        String priceString = null;
+
         for (Row row : sheet) {
+            int newTrajet = 0;
+            for (Cell cell : row) {
+                if (row.getRowNum() != 0) {
+                    String cellValue = dataFormatter.formatCellValue(cell);
 
-                            for (Cell cell : row) {
-                                if (row.getRowNum()!=0) {
-                                    String cellValue = dataFormatter.formatCellValue(cell);
+                    array.set(cell.getColumnIndex(), cellValue);
 
-                                    array.set(cell.getColumnIndex(), cellValue);
+                    if (row.getRowNum() >= 1) {
+                        if (cell.getColumnIndex() == 0) {
+                            if (checkNull(array) == true) {
+                                newTrajet = 1;
+                            }
 
-                                    if (row.getRowNum() >= 1) {
-                                        if (cell.getColumnIndex() == 0) {
-                                            if (cellValue.equals("0"))
-                                            {
-                                                newTrajet = 1;
-                                            }
 
-                                        }
+                        }
 
-                                        if (cell.getColumnIndex() == 2) {
-                                            chauffeur = cellValue;
-                                        }
+                        if (cell.getColumnIndex() == 2) {
+                            chauffeur = cellValue;
+                        }
 
-                                        if (cell.getColumnIndex() == 7) {
+                        if (cell.getColumnIndex() == 7) {
 
-                                            priceString = cellValue;
-                                            int priceInt = Integer.parseInt(priceString)/2;
-                                            priceString = Integer.toString(priceInt);
-                                        }
+                            priceString = cellValue;
+                            int priceInt = Integer.parseInt(priceString) / 2;
+                            priceString = Integer.toString(priceInt);
+                        }
 
-                                        if (cell.getColumnIndex() == 12) {
-                                            toBDD(array, newTrajet, chauffeur, priceString,row.getRowNum(),workbook,sheet);
-                                        }
+                        if (cell.getColumnIndex() == 12) {
+                            toBDD(array, newTrajet, chauffeur, priceString, row.getRowNum(), workbook, sheet);
+                        }
 
                     }
                 }
@@ -75,36 +75,44 @@ public class Excel {
 
     }
 
-    private void toBDD(ArrayList<String> array, int newTrajet, String chauffeur, String price,int row,Workbook workbook,Sheet sheet) throws SQLException,IOException{
-        if (newTrajet == 1 ){
+    private void toBDD(ArrayList<String> array, int newTrajet, String chauffeur, String price, int row, Workbook workbook, Sheet sheet) throws SQLException, IOException {
+        if (newTrajet == 1) {
             Insert.trajet(array);
 
             int id = Select.idTrajet();
-            Insert.remuneration(chauffeur,Integer.toString(id),price);
-            changeIdTrajet(id,row,workbook,sheet);
-            System.out.println("L'id nouvelle est "+ id);
-        }else{
+            Insert.remuneration(chauffeur, Integer.toString(id), price);
+            changeIdTrajet(id, row, workbook, sheet);
+            System.out.println("L'id nouvelle est " + id);
+        } else {
             Update.trajet(array);
         }
     }
 
-    private void changeIdTrajet(int id, int rowId,Workbook workbook,Sheet sheet) throws IOException {
-            Row row = sheet.getRow(rowId);
-            Cell cell = row.getCell(0);
-            if (cell != null) {
-                cell.setCellType(CellType.NUMERIC);
-                cell.setCellValue(id);
-            }
-            FileOutputStream fileOut = new FileOutputStream(name + ".new");
-            workbook.write(fileOut);
-            fileOut.close();
-            Files.delete(Paths.get(name + ".new"));
-
-
+    private void changeIdTrajet(int id, int rowId, Workbook workbook, Sheet sheet) throws IOException {
+        Row row = sheet.getRow(rowId);
+        Cell cell = row.getCell(0);
+        if (cell != null) {
+            cell.setCellType(CellType.NUMERIC);
+            cell.setCellValue(id);
+        }
+        FileOutputStream fileOut = new FileOutputStream(name + ".new");
+        workbook.write(fileOut);
+        fileOut.close();
+        Files.delete(Paths.get(name + ".new"));
 
 
     }
 
+    public static boolean checkNull(ArrayList<String> array) throws SQLException {
+
+        String id = array.get(0);
+        if (id.equals("0")) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 
 }
 

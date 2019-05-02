@@ -33,26 +33,11 @@ public class Insert {
         }
     }
 
-    public static boolean checkNull (ArrayList<String> array) throws SQLException {
 
-        String id = array.get(0);
-        if (id.equals("0"))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
-    }
 
 
     public static void trajet(ArrayList<String> array) throws SQLException {
-        if (checkNull(array) == true)
-        {
-            array.set(0,"NULL");
-        }
+
         Connection conn = startBdd();
         PreparedStatement prepare = conn.prepareStatement("INSERT INTO trajet (idTrajet,idClient, idChauffeur, heureDebut, heureFin, dateResevation, distanceTrajet, prixtrajet, debut, fin, duration,state,stateDriver) VALUES (" +
                  "" + array.get(0) + "," +

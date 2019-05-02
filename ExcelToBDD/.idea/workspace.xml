@@ -4,6 +4,8 @@
     <list default="true" id="2b1317e8-cab6-44f0-b61b-6d0b62436a92" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/excel.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/excel.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/excelToBDD/Excel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/excelToBDD/Excel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/excelToBDD/Insert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/excelToBDD/Insert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/excelToBDD/Update.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/excelToBDD/Update.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,7 +31,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/excelToBDD/Bdd.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
+            <state relative-caret-position="-288">
               <caret line="12" selection-start-line="12" selection-end-line="12" />
             </state>
           </provider>
@@ -47,8 +49,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/excelToBDD/Insert.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="20" column="37" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
+            <state relative-caret-position="80">
+              <caret line="35" selection-start-line="35" selection-end-line="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -59,8 +61,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/excelToBDD/Update.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="48" column="28" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
+            <state relative-caret-position="799">
+              <caret line="47" column="53" selection-start-line="47" selection-start-column="53" selection-end-line="47" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -71,8 +73,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/excelToBDD/Read.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-241">
-              <caret line="34" column="43" lean-forward="true" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
+            <state relative-caret-position="459">
+              <caret line="34" column="43" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -80,8 +82,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/excelToBDD/Excel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="91" selection-start-line="91" selection-end-line="91" />
+            <state relative-caret-position="443">
+              <caret line="77" column="170" selection-start-line="77" selection-start-column="170" selection-end-line="77" selection-end-column="170" />
             </state>
           </provider>
         </entry>
@@ -112,6 +114,7 @@
       <find>startBddReqInsert</find>
       <find>idTrajet</find>
       <find>Cell</find>
+      <find>checkNull</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -178,7 +181,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556783246921" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556821231374" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -234,7 +237,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13006397" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13113007" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -330,23 +333,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/excelToBDD/Select.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="18" column="30" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/excelToBDD/Update.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="48" column="28" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/excelToBDD/RequestInsert.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -354,27 +340,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/excelToBDD/Read.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-241">
-          <caret line="34" column="43" lean-forward="true" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/excelToBDD/Bdd.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
+        <state relative-caret-position="-288">
           <caret line="12" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/excelToBDD/Insert.java">
+    <entry file="file://$PROJECT_DIR$/src/excelToBDD/Select.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="20" column="37" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="255">
+          <caret line="18" column="30" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -385,10 +361,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/excelToBDD/Read.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="34" column="43" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/excelToBDD/Update.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="47" column="53" selection-start-line="47" selection-start-column="53" selection-end-line="47" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/excelToBDD/Insert.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/excelToBDD/Excel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="91" selection-start-line="91" selection-end-line="91" />
+        <state relative-caret-position="443">
+          <caret line="77" column="170" selection-start-line="77" selection-start-column="170" selection-end-line="77" selection-end-column="170" />
         </state>
       </provider>
     </entry>

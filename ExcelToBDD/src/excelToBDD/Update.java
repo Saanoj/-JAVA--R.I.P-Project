@@ -45,8 +45,8 @@ public class Update {
                 "prixtrajet =" + array.get(7) + ", " +
                 "debut = '" + array.get(8) + "', " +
                 "fin = '" + array.get(9) + "', " +
-                "duration = '" + array.get(10) + " '" +
-                "state = ' Finis'" +
+                "duration = '" + array.get(10) + " '," +
+                "state = ' Finis'," +
                 "stateDriver = '1'" +
                 "WHERE idTrajet = '"+array.get(0)+"'");
        // System.out.println(prepare);
