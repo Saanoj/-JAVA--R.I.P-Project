@@ -82,9 +82,9 @@ public class Excel {
 
     private void changeIdTrajet(int id, int row) throws IOException{
         Workbook workbook = WorkbookFactory.create(new File(name));
-        Sheet sheet = workbook.createSheet("Employee");
+        Sheet sheet = workbook.getSheetAt(0);
         Row headerRow = sheet.createRow(row);
-        Cell cell = headerRow.createCell(1);
+        Cell cell = headerRow.createCell(0);
         cell.setCellValue(id);
         workbook.close();
 
