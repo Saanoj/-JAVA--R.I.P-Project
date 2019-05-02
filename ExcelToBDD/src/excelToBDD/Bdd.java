@@ -20,22 +20,16 @@ public class Bdd {
         return conn;
     }
 
-    public static Connection startBDD(Bdd bdd)
-    {
-        Connection conn = null;
-        bdd.startConnect();
-        conn = bdd.getConn();
-        return conn;
-    }
 
+//permer de start la bdd
     public void startConnect() {
 
         try {
 
-            //STEP 3: Open a connection
-            // System.out.println("Conection à la base de données...");
+
+             System.out.println("Conection à la base de données...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-           // System.out.println("Connection réussit à la base de données...");
+            System.out.println("Connection réussit à la base de données...");
 
         } catch (SQLException se) {
             //Handle errors for JDBC
@@ -49,14 +43,4 @@ public class Bdd {
 
     }
 
-    public void stopConnect(Connection conn) {
-        //finally block used to close resources
-        try {
-            if (conn != null)
-                conn.close();
-        } catch (SQLException se) {
-            se.printStackTrace();
-        }//end finally try
-        System.out.println("Goodbye!");
-    }
 }
