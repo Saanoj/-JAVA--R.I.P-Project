@@ -1,14 +1,11 @@
 package excelToBDD;
 
-import com.mysql.cj.xdevapi.Column;
-import org.apache.commons.compress.archivers.dump.InvalidFormatException;
-import org.apache.commons.compress.utils.IOUtils;
-import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.Inet4Address;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
@@ -22,23 +19,42 @@ public class Excel {
         this.name = name;
     }
 
-    public void justDoIt() throws IOException, SQLException{
-        this.chauffeur();
-        this.collab();
+    public static boolean checkNull(ArrayList<String> array, int index) throws SQLException {
+
+        String id = array.get(index);
+        if (id.equals("0")) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
-    public void collab() throws IOException, SQLException{
+    public void justDoIt() throws IOException, SQLException {
+       if(!this.chauffeur()){
+           System.out.println("L'id dans la case chauffeur n'est pas celle d'un chauffeur");
+        }
+        if (!this.collab()) {
+            System.out.println("Il y a un problème avec votre id de service la personne n'est pas un collaborateur ou un chauffeur");
+        }
+    }
+
+    public boolean collab() throws IOException, SQLException {
         Workbook workbook = WorkbookFactory.create(new File(name));
         Sheet sheet = workbook.getSheet("Collab");
         DataFormatter dataFormatter = new DataFormatter();
-        String[] arrayForBdd = new String[8];
+        String[] arrayForBdd = new String[9];
         ArrayList<String> array = new ArrayList<>(Arrays.asList(arrayForBdd));
-
 
 
         for (Row row : sheet) {
             String collab = null;
+            String service = null;
             String priceString = null;
+            String idRem = null;
+            String debut = null;
+            String fin = null;
+            Double heureTotal = null;
             int newService = 0;
             for (Cell cell : row) {
                 if (row.getRowNum() != 0) {
@@ -48,61 +64,107 @@ public class Excel {
 
                     if (row.getRowNum() >= 1) {
                         if (cell.getColumnIndex() == 0) {
-                            if (checkNull(array) == true) {
+                            if (checkNull(array, 0) == true) {
                                 newService = 1;
                             }
-
-
                         }
 
+                        if (cell.getColumnIndex() == 2) {
+                            service = cellValue;
+                            if (service.equals("11") || service.equals("12") || service.equals("13")) {
+
+                            } else {
+                                return false;
+                            }
+                        }
 
                         if (cell.getColumnIndex() == 3) {
                             collab = cellValue;
-                            priceString = Integer.toString(Select.priceCollab(collab));
+                            priceString = Select.dynamique("collaborateurs","prixCollaborateur","idCollaborateurs",collab, "string");
                         }
 
+                        if (cell.getColumnIndex() == 6){
+                            debut = cellValue;
+                        }
 
+                        if (cell.getColumnIndex() == 7){
+                            fin = cellValue;
+                            heureTotal = checkTime(debut,fin);
+                            priceString = Double.toString(Double.parseDouble(priceString)* heureTotal);
+                        }
 
-
-
-
-                        if (cell.getColumnIndex() == 7) {
+                        if (cell.getColumnIndex() == 8) {
+                            if (!checkNull(array, 8)) {
+                                idRem = cellValue;
+                            }
                             toBDDCollab(array, newService, collab, priceString, row.getRowNum(), workbook, sheet);
                         }
-
                     }
                 }
-
             }
         }
         workbook.close();
-
+        return true;
     }
+
+    private Double checkTime(String debut, String fin){
+        double debutInt, minDeb, finInt, minFin, heureTotal;
+        String[] debutTab, finTab;
+        debutTab = debut.split(":");
+        finTab = fin.split(":");
+        debutInt = Integer.parseInt(debutTab[0]);
+        finInt = Integer.parseInt(finTab[0]);
+        minDeb = Integer.parseInt(debutTab[1]);
+        minFin = Integer.parseInt(finTab[1]);
+        if (minDeb < 30){
+            minDeb = 0;
+        }else{
+            minDeb = 0.5;
+        }
+
+        if (minFin < 30){
+            minFin = 0;
+        }else{
+            minFin = 0.5;
+        }
+        heureTotal =(finInt+minFin)-(debutInt-minDeb);
+        if (heureTotal<0.0){
+            debutInt = 24 - debutInt-minDeb;
+            heureTotal = debutInt + (finInt+minFin);
+        }
+        if (heureTotal == 0.0){
+            heureTotal = 0.5;
+        }
+        return heureTotal;
+    }
+
     private void toBDDCollab(ArrayList<String> array, int newService, String collab, String price, int row, Workbook workbook, Sheet sheet) throws SQLException, IOException {
         if (newService == 1) {
             Insert.service(array);
 
             int id = Select.idLink();
+            int rem = Select.idRem();
             Insert.remuneration(collab, Integer.toString(id), price);
             changeId(id, row, workbook, sheet);
-            System.out.println("L'id nouvelle est " + id);
+            changeRem(rem, row, workbook, sheet, 8);
         } else {
             Update.service(array);
         }
     }
 
-    public void chauffeur() throws IOException, SQLException {
+    public boolean chauffeur() throws IOException, SQLException {
         Workbook workbook = WorkbookFactory.create(new File(name));
         Sheet sheet = workbook.getSheet("Chauffeur");
         DataFormatter dataFormatter = new DataFormatter();
-        String[] arrayForBdd = new String[13];
+        String[] arrayForBdd = new String[14];
         ArrayList<String> array = new ArrayList<>(Arrays.asList(arrayForBdd));
-
 
 
         for (Row row : sheet) {
             String chauffeur = null;
             String priceString = null;
+            String distance = null;
+            String idRem = null;
             int newTrajet = 0;
             for (Cell cell : row) {
                 if (row.getRowNum() != 0) {
@@ -112,48 +174,63 @@ public class Excel {
 
                     if (row.getRowNum() >= 1) {
                         if (cell.getColumnIndex() == 0) {
-                            if (checkNull(array) == true) {
-                                newTrajet = 1;
+                            if (checkNull(array, 0)) {
+                                newTrajet = -1;
+                            } else {
+                                newTrajet = Integer.parseInt(cellValue);
                             }
-
-
                         }
 
                         if (cell.getColumnIndex() == 2) {
                             chauffeur = cellValue;
+                            if(!checkChauffeur(chauffeur)){
+                                return false;
+                            }
+                        }
+                        if (cell.getColumnIndex() == 6) {
+                            distance = cellValue;
                         }
 
-                        if (cell.getColumnIndex() == 7) {
 
-                            priceString = cellValue;
-                            int priceInt = Integer.parseInt(priceString) / 2;
-                            priceString = Integer.toString(priceInt);
-                        }
+                        if (cell.getColumnIndex() == 13) {
+                            if (!checkNull(array, 13)) {
+                                idRem = cellValue;
+                            }
 
-                        if (cell.getColumnIndex() == 12) {
-                            toBDDChauffeur(array, newTrajet, chauffeur, priceString, row.getRowNum(), workbook, sheet);
+                            priceString = Float.toString(Select.dynamique("collaborateurs","prixCollaborateur","idCollaborateurs",chauffeur,1f) * Float.parseFloat(distance));
+
+                            toBDDChauffeur(array, newTrajet, chauffeur, priceString, row.getRowNum(), workbook, sheet, idRem);
                         }
 
                     }
                 }
-
             }
         }
         workbook.close();
-
-
+        return true;
     }
 
-    private void toBDDChauffeur(ArrayList<String> array, int newTrajet, String chauffeur, String price, int row, Workbook workbook, Sheet sheet) throws SQLException, IOException {
-        if (newTrajet == 1) {
-            Insert.trajet(array);
+    private boolean checkChauffeur(String chauffeur) throws SQLException{
+        String test = Select.dynamique("collaborateurs","metier","idCollaborateurs",chauffeur,"string");
+        if(!test.equals("chauffeur")){
+            return false;
+        }
+        return true;
+    }
 
+    private void toBDDChauffeur(ArrayList<String> array, int newTrajet, String chauffeur, String price, int row, Workbook workbook, Sheet sheet, String idRem) throws SQLException, IOException {
+        if (newTrajet == -1) {
+            Insert.trajet(array);
             int id = Select.idTrajet();
+            int rem = Select.idRem();
             Insert.remuneration(chauffeur, Integer.toString(id), price);
             changeId(id, row, workbook, sheet);
+            changeRem(rem, row, workbook, sheet, 13);
+
             System.out.println("L'id nouvelle est " + id);
         } else {
             Update.trajet(array);
+            Update.remuneration(chauffeur, Integer.toString(newTrajet), price, idRem);
         }
     }
 
@@ -172,14 +249,18 @@ public class Excel {
 
     }
 
-    public static boolean checkNull(ArrayList<String> array) throws SQLException {
-
-        String id = array.get(0);
-        if (id.equals("0")) {
-            return true;
-        } else {
-            return false;
+    private void changeRem(int id, int rowId, Workbook workbook, Sheet sheet, int rem) throws IOException {
+        Row row = sheet.getRow(rowId);
+        Cell cell = row.getCell(rem);
+        if (cell != null) {
+            cell.setCellType(CellType.NUMERIC);
+            cell.setCellValue(id);
         }
+        FileOutputStream fileOut = new FileOutputStream(name + ".new");
+        workbook.write(fileOut);
+        fileOut.close();
+        Files.delete(Paths.get(name + ".new"));
+
 
     }
 

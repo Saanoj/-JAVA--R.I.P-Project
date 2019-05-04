@@ -20,16 +20,22 @@ public class Bdd {
         return conn;
     }
 
-
+    public static Connection startBdd()
+    {
+        Config config = new Config("config.txt");
+        Bdd bdd = new Bdd(config.getUser(), config.getPass(), config.getBdname());
+        Connection conn = null;
+        bdd.startConnect();
+        conn = bdd.getConn();
+        return conn;
+    }
 //permer de start la bdd
     public void startConnect() {
 
         try {
-
-
-             System.out.println("Conection à la base de données...");
+            // System.out.println("Conection à la base de données...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("Connection réussit à la base de données...");
+           // System.out.println("Connection réussit à la base de données...");
 
         } catch (SQLException se) {
             //Handle errors for JDBC
@@ -40,7 +46,5 @@ public class Bdd {
             e.printStackTrace();
             System.out.println("Handle errors for Class.forName");
         }
-
     }
-
 }

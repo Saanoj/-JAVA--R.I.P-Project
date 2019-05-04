@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: C:\Users\jonas\OneDrive\Documents\Java RIP\ExcelToBDD\out\
+ production\ExcelToBDD\excelToBDD
+Main-Class: excelToBDD.Main
+

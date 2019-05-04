@@ -1,0 +1,4 @@
+﻿Excel:excel.xlsx
+Nom d'utilisateur de la base de donnée:root
+Mot de passe de la base de donnée("null",Si aucun mot de passe n'est définie):null
+Nom de la base de donnée:RIP
